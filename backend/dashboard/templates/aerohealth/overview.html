@@ -1,0 +1,27 @@
+{% extends "aerohealth/base.html" %}
+{% load static %}
+{% block title %}Overview · AeroHealth{% endblock %}
+
+{% block content %}
+<section class="hello">
+  <div>
+    <h1 id="greeting">A brighter day starts here.</h1>
+    <p class="muted">Your skies, your air, your wellbeing. All in a little more focus.</p>
+  </div>
+  <div class="right"><label class="citysel">📍 <select id="city" aria-label="Choose a city"></select></label>
+    <div class="muted" id="stamp"></div></div>
+</section>
+
+<div class="grid" id="overview" data-api="/api/overview/">
+  <article class="card weather" id="weather"></article>
+  <article class="card air" id="air"></article>
+  <article class="card personal" id="personal"></article>
+  <article class="card span2" id="hourly"></article>
+  <article class="card" id="week"></article>
+  <article class="card span2" id="chart"></article>
+  <article class="card outside" id="outside"></article>
+</div>
+<p class="foot muted">Weather: Open-Meteo · Air quality: CPCB, TROPOMI · Forecasts are estimates, not medical advice.</p>
+{% endblock %}
+
+{% block scripts %}<script src="{% static 'aerohealth/js/overview.js' %}"></script>{% endblock %}

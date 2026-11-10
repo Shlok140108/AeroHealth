@@ -1,0 +1,35 @@
+{% load static %}<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AeroHealth</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'aerohealth/css/aerohealth.css' %}">
+<link rel="stylesheet" href="{% static 'aerohealth/css/pages.css' %}"></head>
+<body class="authbody">
+<div class="auth">
+  <div class="hero"><a class="logo light" href="/"><span class="logo-mark">≋</span> aerohealth</a>
+    <div class="herotext"><div class="glass">⛅ Pune · 28° · AQI 88 · Moderate</div>
+      <h2>A little more clarity.<br>A lot more fresh air.</h2>
+      <p>Weather and air quality, thoughtfully connected to the way you live.</p></div></div>
+  <div class="formside">
+  {% if mode == "login" %}
+    <p class="kicker">YOUR DAILY DOSE OF CLARITY</p>
+    <h1>Good to see you.<br>Let's clear the air.</h1>
+    <p class="muted">Sign in for forecasts that care about your world, and your wellbeing.</p>
+    <form method="post" action="/" onsubmit="location.href='/';return false">
+      <label class="lbl">Email address</label><input class="field" type="email" placeholder="you@email.com" required>
+      <label class="lbl">Password</label><input class="field" type="password" placeholder="••••••••" required>
+      <div class="row" style="margin:12px 0"><label class="muted"><input type="checkbox" checked> Remember me</label><a class="btn" style="margin:0">Forgot password?</a></div>
+      <button class="save wide">Sign in to AeroHealth →</button>
+    </form>
+    <p class="muted center">🛡 Your health preferences stay yours. Always.</p>
+  {% else %}
+    <div class="okicon">≋✓</div><span class="pill mintpill">You're safely signed out</span>
+    <h1>Take care, Maya.<br>See you in the clear.</h1>
+    <p class="muted">Your session has ended securely. Your places, preferences and personal forecasts will be right here when you return.</p>
+    <div class="card" style="background:#f4f3fb">Maya Patel<br><span class="muted">maya.patel@email.com</span></div>
+    <a href="/login/" class="save wide" style="display:block;text-align:center;margin-top:14px">Sign back in →</a>
+    <a href="/login/" class="ghost wide" style="display:block;text-align:center;margin-top:10px">Use a different account</a>
+  {% endif %}
+  </div>
+</div>
+</body></html>

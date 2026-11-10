@@ -1,0 +1,43 @@
+{% extends "aerohealth/base.html" %}
+{% load static %}
+{% block title %}Weather · AeroHealth{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'aerohealth/vendor/leaflet/leaflet.css' %}">
+<link rel="stylesheet" href="{% static 'aerohealth/css/pages.css' %}">
+<link rel="stylesheet" href="{% static 'aerohealth/css/weather.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hello">
+  <div><h1>Weather</h1><p class="muted">Live conditions for wherever you are, or anywhere you search.</p></div>
+  <div class="seg" id="units" role="group" aria-label="Units">
+    <button type="button" data-u="c">°C · km/h</button><button type="button" data-u="f">°F · mph</button>
+  </div>
+</section>
+
+<div id="wxapp" data-api="/api/live/">
+  <div id="wxnote" class="wxnote" hidden></div>
+  <section class="wx-hero clear-day" id="hero"><div class="skeleton">Loading weather…</div></section>
+  <section class="card" id="hours"></section>
+  <div class="wx-cols">
+    <article class="card" id="days"></article>
+    <div class="tiles" id="tiles"></div>
+  </div>
+</div>
+
+<section class="card tracker" id="tracker">
+  <div class="row">
+    <div><h3>Live location tracker</h3><p class="muted" id="trk-msg">Share your position and the weather follows you as you move.</p></div>
+    <div class="trk-actions"><button type="button" class="ghost" id="trk-center" hidden>Re-centre</button>
+      <button type="button" class="save" id="trk-btn">Start tracking</button></div>
+  </div>
+  <div id="map" class="map" role="img" aria-label="Map showing your live position"></div>
+  <div class="trk-stats" id="trk-stats"></div>
+</section>
+<p class="foot muted">Weather: Open-Meteo · Place names &amp; map: © OpenStreetMap contributors · Your position stays in your browser; only rounded coordinates are sent to fetch the forecast.</p>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'aerohealth/vendor/leaflet/leaflet.js' %}"></script>
+<script src="{% static 'aerohealth/js/weather.js' %}"></script>
+{% endblock %}

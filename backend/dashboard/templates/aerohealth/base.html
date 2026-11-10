@@ -1,0 +1,35 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AeroHealth{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'aerohealth/css/aerohealth.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header class="topbar">
+    <a class="logo" href="/"><span class="logo-mark">≋</span> aerohealth</a>
+    <div class="search"><span>🔍</span><input id="gsearch" type="search" placeholder="Search any city" autocomplete="off" aria-label="Search any city">
+      <div id="gres" class="gres" hidden></div></div>
+    <button id="livebtn" class="livebtn" type="button" aria-pressed="false"><i class="dot"></i><span>📍 Use live location</span></button>
+    <div class="who"><span class="bell">🔔</span>
+      <div class="avatar" id="avatar">M</div>
+      <div><small>Your personal forecast</small><b id="username">Maya Patel</b></div>
+    </div>
+  </header>
+
+  <main class="page">{% block content %}{% endblock %}</main>
+
+  <nav class="bottomnav">
+    <a href="/" class="{% if request.path == '/' %}on{% endif %}">▦ Dashboard</a>
+    <a href="/weather/" class="{% if '/weather' in request.path %}on{% endif %}">☁ Weather</a>
+    <a href="/prediction/" class="{% if '/prediction' in request.path %}on{% endif %}">≋ Prediction</a>
+    <a href="/account/" class="{% if '/account' in request.path %}on{% endif %}">☺ Account</a>
+  </nav>
+  <script src="{% static 'aerohealth/js/location.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,61 @@
+{% extends "aerohealth/base.html" %}
+{% load static %}
+{% block title %}Account · AeroHealth{% endblock %}
+{% block head %}<link rel="stylesheet" href="{% static 'aerohealth/css/pages.css' %}">{% endblock %}
+
+{% block content %}
+<section class="hello"><div><h1>Your world. Your way.</h1>
+  <p class="muted">A forecast is more useful when it understands you.</p></div></section>
+
+<form id="prefs" class="acct" onsubmit="return false">
+  <aside class="card profile">
+    <div class="avatar big-av">M</div>
+    <h3>Maya Patel</h3><p class="muted">maya.patel@email.com</p>
+    <span class="pill peach">Asthma-aware · everyday explorer</span>
+    <nav class="side"><a class="on">Profile &amp; preferences</a><a>Privacy &amp; security</a><a>Connected devices</a><a>Help centre</a></nav>
+    <div class="privacy">🔒 <b>Personal means private.</b><br>Your health preferences are only used to personalise your guidance.</div>
+    <a href="/signed-out/" class="btn">Sign out of AeroHealth</a>
+  </aside>
+
+  <section class="card"><h3>Your wellbeing profile</h3>
+    <p class="muted">We keep an eye on particles so you can focus on your day.</p>
+    <div class="chips"><span class="pill peach">Asthma sensitivity</span><span class="pill peach">Dust allergy</span></div>
+    <label class="lbl">Guidance sensitivity <b id="sensv">High</b></label>
+    <input type="range" min="1" max="3" value="3" id="sens"><div class="row muted"><span>Standard</span><span>Extra cautious</span></div>
+    <label class="lbl">Preferred activity &amp; time</label>
+    <select><option>Gentle walks · Evenings</option><option>Outdoor running · Early mornings</option><option>Commute · Weekdays</option></select>
+  </section>
+
+  <section class="card"><h3>Forecasts that feel like you</h3>
+    <div class="opt"><span>Temperature</span><select><option>°C</option><option>°F</option></select></div>
+    <div class="opt"><span>Wind speed</span><select><option>km/h</option><option>mph</option></select></div>
+    <div class="opt"><span>Air quality standard</span><select><option>CPCB (India)</option><option>US AQI</option></select></div>
+    <div class="opt"><span>Language</span><select><option>English</option><option>हिन्दी</option><option>मराठी</option><option>தமிழ்</option><option>বাংলা</option></select></div>
+  </section>
+
+  <section class="card span-l"><h3>A heads-up, not a worry</h3>
+    <label class="lbl">Alert when CPCB AQI rises above <b id="thv">150</b></label>
+    <input type="range" min="50" max="400" step="10" value="150" id="th"><div class="row muted"><span>0 Good</span><span>500 Severe</span></div>
+    <div class="sw-row"><span>Push</span><input type="checkbox" class="sw" checked></div>
+    <div class="sw-row"><span>SMS</span><input type="checkbox" class="sw"></div>
+    <div class="sw-row"><span>Voice call</span><input type="checkbox" class="sw"></div>
+    <div class="sw-row"><span>Fresh-air reminders · daily at 5 PM</span><input type="checkbox" class="sw" checked></div>
+    <div class="sw-row"><span>Stubble-burning smoke alerts</span><input type="checkbox" class="sw" checked></div>
+  </section>
+
+  <section class="card blue"><h3>Your little corner of the world</h3>
+    <div class="place">🏠 Home <span class="muted">Pune</span><b>AQI 88</b></div>
+    <div class="place">📍 Work <span class="muted">Hinjewadi</span><b>AQI 96</b></div>
+    <a class="btn">+ Add place</a>
+  </section>
+
+  <div class="savebar"><span class="muted">🛡 Health guidance is informational, not medical advice.</span>
+    <button type="reset" class="ghost">Reset changes</button><button type="button" class="save" id="save">Save preferences ✓</button></div>
+</form>
+
+<script>
+const L={1:'Standard',2:'Elevated',3:'High'};
+sens.oninput=()=>sensv.textContent=L[sens.value]; th.oninput=()=>thv.textContent=th.value;
+save.onclick=()=>{localStorage.setItem('aero_prefs',JSON.stringify({sens:sens.value,th:th.value}));save.textContent='Saved ✓';setTimeout(()=>save.textContent='Save preferences ✓',1500)};
+</script>
+{% endblock %}

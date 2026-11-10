@@ -1,0 +1,10 @@
+.aeroH/
+datascience/data/raw/
+datascience/data/processed/
+archive-2/
+*.pyc
+__pycache__/
+.env
+.DS_Store
+.aero/
+db.sqlite3

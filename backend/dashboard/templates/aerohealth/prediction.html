@@ -1,0 +1,22 @@
+{% extends "aerohealth/base.html" %}
+{% load static %}
+{% block title %}Prediction · AeroHealth{% endblock %}
+
+{% block content %}
+<section class="hello">
+  <div><h1>Prediction</h1><p class="muted">Weather and air quality outlook, and what it means for your health.</p></div>
+  <div class="right"><label class="citysel">📍 <select id="city" aria-label="Choose a city"></select></label>
+    <div class="muted" id="stamp"></div></div>
+</section>
+
+<div class="grid2" id="pred" data-api="/api/prediction/">
+  <article class="card" id="wx"></article>
+  <article class="card" id="aq"></article>
+</div>
+
+<h2 class="sect">Health advice &amp; concerns</h2>
+<div id="health"></div>
+<p class="foot muted">Weather: Open-Meteo · AQI: AeroHealth model on forecast pollutants (CPCB scale) · General guidance only, not medical advice.</p>
+{% endblock %}
+
+{% block scripts %}<script src="{% static 'aerohealth/js/prediction.js' %}"></script>{% endblock %}
